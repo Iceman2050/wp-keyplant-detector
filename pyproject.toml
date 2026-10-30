@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wp-keyplant-detector"
+version = "1.0.0"
+description = "Audit a WordPress plugins export for backdoors planted via stolen remote-management keys (UpdraftCentral attack class)"
+readme = "README.md"
+requires-python = ">=3.9"
+
+[project.scripts]
+wp-keyplant-detector = "wp_keyplant_detector.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["wp_keyplant_detector*"]

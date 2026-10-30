@@ -1,0 +1,22 @@
+{
+  "clean-plugin": {
+    "version": "1.2.3",
+    "files": {
+      "clean-plugin.php": "5b1d30a1945b63bf7706514fe7369a2b198207da8c94f4a022de140530316c16",
+      "includes/helper.php": "27b312abff432a86293c6f453b6552635b6fa8fec2c4cd49b687dda5872bf231"
+    }
+  },
+  "tampered-plugin": {
+    "version": "2.0.0",
+    "files": {
+      "tampered-plugin.php": "b7e0d757154c1fcfa4acb470310d225e7a5006bacbc719c6674e148785c845b9",
+      "includes/core.php": "75c95d13f684d04663b1b514cd2b91c1c14073ac052bf81041701d3b5c9f430e"
+    }
+  },
+  "updraftplus": {
+    "version": "1.26.13",
+    "files": {
+      "updraftplus.php": "b2ea315a4104a28079201f06938237c9115a1eb5576a6054114180c255ccd023"
+    }
+  }
+}

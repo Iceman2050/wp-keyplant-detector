@@ -1,0 +1,9 @@
+{
+  "clean-plugin": {
+    "version": "1.2.3",
+    "files": {
+      "clean-plugin.php": "728048139ba7c545f6b53278d26f397f",
+      "includes/helper.php": "67c9542dc0541dc10daecdcf9987b60e"
+    }
+  }
+}

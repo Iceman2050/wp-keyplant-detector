@@ -1,0 +1,16 @@
+PUSH QUEUE - wp-keyplant-detector
+Status: QUEUED - do not push yet.
+
+Reason: GitHub account is suspended (appeal pending) and GitLab project
+creation is capped, so no remote project exists for this repo yet.
+The repo is committed locally only.
+
+When the GitLab project Iceman2050/wp-keyplant-detector exists and pushes
+are cleared, run exactly:
+
+  cd ~/workspace/unicorn-wave12-wp-keyplant-detector
+  git remote add gitlab git@gitlab.com:Iceman2050/wp-keyplant-detector.git
+  git push gitlab HEAD:main
+
+Respect the fleet push throttle (max 3 pushes per rolling 60 minutes per
+repo) when this runs.
