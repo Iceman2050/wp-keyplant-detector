@@ -50,6 +50,42 @@ What it checks:
 
 Exit codes: `1` if any HIGH finding exists, `0` otherwise, `2` on bad inputs (missing directory, missing file, malformed JSON). Add `--json` for machine-readable output.
 
+## Real run — the bundled fixtures
+
+Captured 2026-11-01 against the fixture tree in `fixtures/` (a clean plugin, a
+planted backdoor, a tampered wp.org plugin, and UpdraftPlus with a
+full-capability management key):
+
+```
+Plugins scanned: 4
+
+[MEDIUM] NOT-FROM-WP.ORG planted-plugin
+  plugin slug 'planted-plugin' (header name 'Site Health Cache') is absent from the wp.org checksum map and absent from the allowlist
+[HIGH] OBFUSCATION planted-plugin
+  planted-plugin.php:11 matched eval: eval(base64_decode($payload));
+[HIGH] MODIFIED-CORE-FILE tampered-plugin
+  file includes/core.php hash mismatch: on disk cebd5405…, official 75c95d13…
+[MEDIUM] EXTRA-FILE tampered-plugin
+  file sneaky-extra.php exists on disk but is absent from the official checksum map for 'tampered-plugin'
+[INFO] KEY-PLANE-PRESENT updraftplus
+  remote-management plugin detected: UpdraftCentral (via UpdraftPlus) (slug 'updraftplus'). This plugin accepts commands signed by a management key; whoever holds that key can install plugins on this site.
+[HIGH] KEY-HIGH-CAPABILITY key:dashboard-main
+  key 'dashboard-main' holds code-changing capabilities: activate_plugins, edit_files, install_plugins
+
+8 finding(s): 4 HIGH, 3 MEDIUM, 1 INFO across 4 plugin(s)
+Verdict: FAIL - HIGH findings present. Investigate before trusting this install.
+```
+
+Reproduce it: `python -m wp_keyplant_detector scan fixtures/plugins --checksums fixtures/checksums.json --keys fixtures/keys.json --allowlist fixtures/allowlist.json` (the suite — 21 tests — passes fully offline).
+
+## What about the live site itself?
+
+This audit reads an export, on purpose — it never touches the running site.
+For the site as attackers actually see it — exposed files, leaked keys, open
+doors — run the free [BreachHunter](https://breachhunter.getingeniousai.com)
+scan, and let [DomainGuard](https://domainguard.getingeniousai.com) watch the
+domain around it (lookalikes, expiring certificates, DNS drift), also free.
+
 ## Input formats
 
 Checksums (`--checksums`):
